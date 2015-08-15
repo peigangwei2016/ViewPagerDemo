@@ -6,11 +6,13 @@ import java.util.List;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
 	private ViewPager mPager;
 	private PagerTabStrip mTitile;
 	@Override
@@ -21,6 +23,29 @@ public class MainActivity extends Activity {
 		mPager=(ViewPager) findViewById(R.id.viewPager);
 //		2.初始化ViewPager中的所有页面
 		List<View> viewList=getData();
+//		初始化所有的Fragment
+		List<Fragment> fragmentList=getFragmentData();
+		
+//		初始化标题
+		initPagerTabStrip();
+		
+//		3.初始化title数据
+		List<String> tatileList=getTatileData();
+//		4.创建ViewPager适配器
+//		MyPagerAdapter adapter=new MyPagerAdapter(viewList,tatileData);
+		
+//		创建FragmentPagerAdatper
+		MyFragmentPagerAdapter adapter=new MyFragmentPagerAdapter(getSupportFragmentManager(),fragmentList,tatileList);
+//		5.给ViewPager设置适配器
+		mPager.setAdapter(adapter);
+		
+		
+	}
+	/**
+	 * 初始化标题
+	 */
+	private void initPagerTabStrip() {
+		// TODO Auto-generated method stub
 //		初始化PagerTabStrip
 		mTitile=(PagerTabStrip)findViewById(R.id.tab);
 //		设置背景色
@@ -31,15 +56,19 @@ public class MainActivity extends Activity {
 		mTitile.setDrawFullUnderline(false);
 //		设置指示器颜色
 		mTitile.setTabIndicatorColor(0xff999999);
+	}
+	/**
+	 * 初始化所有的Fragment
+	 * @return
+	 */
+	private List<Fragment> getFragmentData() {
+		List<Fragment> list=new ArrayList<Fragment>();
+		list.add(new Fragment1());
+		list.add(new Fragment2());
+		list.add(new Fragment3());
+		list.add(new Fragment4());
 		
-//		3.初始化title数据
-		List<String> tatileData=getTatileData();
-//		4.创建ViewPager适配器
-		MyPagerAdapter adapter=new MyPagerAdapter(viewList,tatileData);
-//		5.给ViewPager设置适配器
-		mPager.setAdapter(adapter);
-		
-		
+		return list;
 	}
 	/**
 	 * 获取所有的标题
