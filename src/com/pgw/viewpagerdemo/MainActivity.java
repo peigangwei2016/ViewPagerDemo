@@ -10,9 +10,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
+import android.widget.Toast;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements OnPageChangeListener {
 	private ViewPager mPager;
 	private PagerTabStrip mTitile;
 	@Override
@@ -21,6 +23,8 @@ public class MainActivity extends FragmentActivity {
 		setContentView(R.layout.activity_main);
 //		1.初始化ViewPager
 		mPager=(ViewPager) findViewById(R.id.viewPager);
+		
+		mPager.setOnPageChangeListener(this);
 //		2.初始化ViewPager中的所有页面
 		List<View> viewList=getData();
 //		初始化所有的Fragment
@@ -31,6 +35,7 @@ public class MainActivity extends FragmentActivity {
 		
 //		3.初始化title数据
 		List<String> tatileList=getTatileData();
+		
 //		4.创建ViewPager适配器
 //		MyPagerAdapter adapter=new MyPagerAdapter(viewList,tatileData);
 		
@@ -101,6 +106,23 @@ public class MainActivity extends FragmentActivity {
 		list.add(view3);
 		list.add(view4);
 		return list;
+	}
+	@Override
+	public void onPageScrollStateChanged(int arg0) {
+		
+	}
+	@Override
+	public void onPageScrolled(int arg0, float arg1, int arg2) {
+		
+	}
+//	现在选择的页面
+	@Override
+	public void onPageSelected(int position) {
+		// TODO Auto-generated method stub
+//		因为他的Position是从0开始
+		position++;
+		Toast.makeText(MainActivity.this, "当前是第"+position+"页", Toast.LENGTH_SHORT).show();
+		
 	}
 
 
