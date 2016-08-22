@@ -75,19 +75,7 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
 		
 		return list;
 	}
-	/**
-	 * 获取所有的标题
-	 * @return
-	 */
-	private List<String> getTatileData() {
-		List<String> list=new ArrayList<String>();
-		list.add("第一页");
-		list.add("第二页");
-		list.add("第三页");
-		list.add("第四页");
-		
-		return list;
-	}
+	
 	/**
 	 * 获取所有的内容页
 	 * @return
@@ -118,7 +106,6 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
 //	现在选择的页面
 	@Override
 	public void onPageSelected(int position) {
-		// TODO Auto-generated method stub
 //		因为他的Position是从0开始
 		position++;
 		Toast.makeText(MainActivity.this, "当前是第"+position+"页", Toast.LENGTH_SHORT).show();
